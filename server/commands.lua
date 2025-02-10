@@ -28,7 +28,6 @@ function createCommand(name, eventType, event, params, helpText, cArgs)
     end
   end, false)
 end
-
 exports('createCommand', createCommand)
 
 

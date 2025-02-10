@@ -8,7 +8,8 @@ client_scripts {
     'client/main.lua',
     'shared/shared.lua',
     'client/testing.lua',
-    'client/spawn.lua'
+    'client/spawn.lua',
+    'client/helpers.lua'
 }
 
 server_scripts {
