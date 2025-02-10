@@ -16,7 +16,6 @@ function createCommand(name, eventType, event, params, helpText, cArgs)
 
   RegisterCommand(name, function(source, args)
     if #args > params then
-      print('Too many arguments')
       return
     end
 
@@ -24,13 +23,10 @@ function createCommand(name, eventType, event, params, helpText, cArgs)
 
     if eventType == 'client' then
       TriggerClientEvent(event, source, table.unpack(finalArgs))
-      print(table.unpack(finalArgs))
     else
       TriggerEvent(event, source, table.unpack(finalArgs))
     end
   end, false)
-
-  print('Command ' .. name .. ' created!')
 end
 
 exports('createCommand', createCommand)
