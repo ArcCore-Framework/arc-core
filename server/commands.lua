@@ -5,31 +5,34 @@ local commands = {}
 ---@param event string
 ---@param params number
 ---@param helpText string
----@param help table
-function createCommand(name, eventType, event, params, helpText, help)
-  -- Store command details in the table
+---@param cArgs table
+function createCommand(name, eventType, event, params, helpText, cArgs)
   commands[name] = {
     eventType = eventType,
     event = event,
     helpText = helpText,
-    help = help,
     params = params
   }
 
-  -- Register the command
   RegisterCommand(name, function(source, args)
+    if #args > params then
+      print('Too many arguments')
+      return
+    end
 
-    if #args > params then print('to many args') return end
+    local finalArgs = #args > 0 and args or cArgs or {}
 
     if eventType == 'client' then
-      TriggerClientEvent(event, source, table.unpack(args or {}))
+      TriggerClientEvent(event, source, table.unpack(finalArgs))
+      print(table.unpack(finalArgs))
     else
-      TriggerEvent(event, source, table.unpack(args or {}))
+      TriggerEvent(event, source, table.unpack(finalArgs))
     end
   end, false)
 
   print('Command ' .. name .. ' created!')
 end
+
 exports('createCommand', createCommand)
 
 
