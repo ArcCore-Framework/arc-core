@@ -10,6 +10,20 @@ lib.callback.register('arc_core:server:getPlayerCharacters', function(source)
   end
 end)
 
+lib.callback.register('arc_core:server:deleteCharacter', function(source, nbid)
+  local src = source
+  local license = GetPlayerIdentifierByType(src, 'license')
+
+  local character = MySQL.single.await('SELECT `license` FROM `players` WHERE `nbid` = ?', { nbid })
+
+  if character.license ~= license then
+    print('how are you douing this')
+  else
+    MySQL.query.await('DELETE FROM `players` WHERE `nbid` = ?', { nbid })
+    TriggerClientEvent('arc_core:client:deleteCharacter', src)
+  end
+end)
+
 local function generateReadableID(fName, lName)
   local initials = string.upper(string.sub(fName, 1, 1) .. string.sub(lName, 1, 1))
   local randomNum = math.random(1000, 9999)   -- 4-digit unique number
