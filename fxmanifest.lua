@@ -6,11 +6,12 @@ version '0.1'
 
 shared_scripts {
     '@ox_lib/init.lua',
+    'shared/sh_config.lua',
 }
 
 client_scripts {
     'client/main.lua',
-    'shared/shared.lua',
+    'shared/cl_config.lua',
     'client/testing.lua',
     'client/spawn.lua',
     'client/helpers.lua'
@@ -19,7 +20,7 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
-    'shared/shared.lua',
+    'shared/sv_config.lua',
     'server/commands.lua'
 }
 
